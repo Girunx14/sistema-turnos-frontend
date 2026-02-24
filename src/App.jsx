@@ -1,6 +1,17 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Kiosko from './pages/Kiosko'
+import SalaEspera from './pages/SalaEspera'
+import PanelAdmin from './pages/PanelAdmin'
+
 function App() {
   return (
-    <div className="bg-red-950 ">App</div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Kiosko />} />
+        <Route path="/sala-espera" element={<SalaEspera />} />
+        <Route path="/panel" element={<PanelAdmin />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
