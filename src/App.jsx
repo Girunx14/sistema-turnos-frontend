@@ -14,7 +14,7 @@ function App() {
         <Routes>
           {/* Rutas públicas */}
           <Route path="/login" element={<Login />} />
-          <Route path="/kiosko" element={<Kiosko />} />
+          <Route path="/turno" element={<Kiosko />} />
           <Route path="/sala-espera" element={<SalaEspera />} />
 
           {/* Rutas protegidas */}

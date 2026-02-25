@@ -67,7 +67,7 @@ export default function Kiosko() {
             </svg>
           </div>
           <div>
-            <p className="text-sm font-bold text-white">Centro de Servicios</p>
+            <p className="text-sm font-bold text-white">Generar Turno</p>
             <p className="text-xs text-slate-500 capitalize">{fmtFecha(hora)}</p>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function Kiosko() {
         {paso === 'seleccion' && (
           <div className="w-full max-w-3xl">
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-black text-white mb-2">Selecciona tu servicio</h1>
+              <h1 className="text-3xl font-black text-white mb-2">¿Qué servicio necesitas?</h1>
               <p className="text-slate-500">Toca una opción para obtener tu turno de atención</p>
             </div>
             {loading ? (
