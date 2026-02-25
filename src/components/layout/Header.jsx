@@ -12,7 +12,7 @@ export default function Header({ title }) {
   }
 
   return (
-    <header className="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 flex-shrink-0">
+    <header className="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 shrink-0">
       <div>
         <h1 className="text-sm font-bold text-white">{title}</h1>
         {usuario?.area && (
