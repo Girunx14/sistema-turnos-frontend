@@ -47,7 +47,7 @@ export default function Login() {
 
         <div className="bg-[#0F172A]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500" />
-          
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
             <div>
               <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">
@@ -97,7 +97,7 @@ export default function Login() {
         </div>
 
         <p className="text-center text-slate-500 text-xs font-medium mt-8 tracking-wide">
-          Sistema de Turnos v1.0 &copy; {new Date().getFullYear()}
+          Sistema de Turnos v1.0 - {new Date().getFullYear()}
         </p>
       </div>
     </div>
