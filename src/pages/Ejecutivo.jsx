@@ -96,148 +96,169 @@ export default function Ejecutivo() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex flex-col font-sans">
-      <Header title="Panel de Ejecutivo" />
+    <div className="min-h-screen bg-[#0B1120] text-slate-200 flex flex-col font-sans relative overflow-hidden">
+      {/* Background Orbs */}
+      <div className="absolute top-0 right-1/4 w-[40rem] h-[40rem] bg-blue-500/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[50rem] h-[50rem] bg-indigo-600/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <main className="flex-1 p-6 flex flex-col gap-6">
+      <Header title="Panel Ejecutivo" />
+
+      <main className="flex-1 p-6 lg:p-8 flex flex-col gap-6 relative z-10">
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatCard
             label="En espera"
             value={stats.espera}
             color="text-yellow-400"
-            icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+            icon={<svg className="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
           />
           <StatCard
             label="Atendidos hoy"
             value={stats.atendidos}
             color="text-emerald-400"
-            icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+            icon={<svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
           />
           <StatCard
             label="Cancelados"
             value={stats.cancelados}
             color="text-red-400"
-            icon={<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+            icon={<svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
           />
         </div>
 
-        <div className="grid grid-cols-5 gap-6 flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 h-full min-h-[500px]">
           {/* Panel izquierdo — Turno activo */}
-          <div className="col-span-2 flex flex-col gap-4">
-            <Card>
-              <p className="text-slate-500 text-xs uppercase tracking-wide mb-4">Atendiendo ahora</p>
+          <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-6 w-full">
+            <Card className="flex-1 flex flex-col">
+              <div className="flex items-center gap-3 mb-8">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
+                <p className="text-slate-400 text-xs uppercase tracking-[0.2em] font-bold">Atendiendo</p>
+              </div>
 
               {turnoActivo ? (
-                <>
-                  <div className="bg-blue-600/10 border border-blue-500/20 rounded-xl p-6 text-center mb-5">
-                    <p className="text-slate-400 text-xs mb-2 uppercase tracking-widest">Folio</p>
-                    <p className="text-6xl font-black text-white tracking-tight">{turnoActivo.folio}</p>
-                    <p className="text-blue-400 text-sm mt-2 font-medium">{turnoActivo.area?.nombre}</p>
-                    <p className="text-slate-600 text-xs mt-1">
-                      Esperando {tiempoEspera(turnoActivo.fecha_hora)}
+                <div className="flex-1 flex flex-col h-full animate-in fade-in duration-300">
+                  <div className="bg-gradient-to-br from-blue-900/40 to-indigo-900/20 border border-blue-500/20 rounded-[2rem] p-8 text-center mb-8 shadow-inner relative overflow-hidden flex-1 flex flex-col items-center justify-center">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl" />
+                    <p className="text-blue-300/80 text-[10px] mb-2 uppercase tracking-[0.3em] font-bold relative z-10">Folio Actual</p>
+                    <p className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 tracking-tighter relative z-10">{turnoActivo.folio}</p>
+                    <div className="mt-6 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold relative z-10">
+                      {turnoActivo.area?.nombre}
+                    </div>
+                    <p className="text-slate-400 text-xs mt-4 font-medium relative z-10">
+                      Esperando <span className="text-yellow-400 font-bold">{tiempoEspera(turnoActivo.fecha_hora)}</span>
                     </p>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <Button variant="success" size="lg" className="w-full" onClick={abrirModalAtender}>
-                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <div className="flex flex-col gap-3 mt-auto">
+                    <Button variant="success" size="xl" className="w-full text-base" onClick={abrirModalAtender}>
+                      <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                       </svg>
-                      Finalizar atención
+                      Finalizar Atención
                     </Button>
                     <Button variant="danger" size="md" className="w-full" onClick={() => cancelarTurno(turnoActivo.id)}>
-                      Cancelar turno
+                      Cancelar Turno
                     </Button>
                   </div>
-                </>
+                </div>
               ) : (
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-3">
-                    <svg className="w-7 h-7 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex-1 flex flex-col items-center justify-center text-center opacity-60">
+                  <div className="w-20 h-20 rounded-full bg-slate-800/50 flex items-center justify-center mb-6 shadow-inner">
+                    <svg className="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <p className="text-slate-600 text-sm mb-5">Sin turno activo</p>
+                  <p className="text-slate-400 font-medium mb-8">Nadie en atención</p>
                   <Button
                     variant="primary"
-                    size="lg"
+                    size="xl"
                     className="w-full"
                     onClick={llamarSiguiente}
                     disabled={turnos.length === 0}
                   >
-                    Llamar siguiente turno
+                    Llamar Siguiente
                   </Button>
                 </div>
               )}
             </Card>
 
-            {turnoActivo && (
-              <Button variant="secondary" size="md" className="w-full" onClick={llamarSiguiente} disabled={turnos.length === 0}>
-                Llamar siguiente
+            {turnoActivo && turnos.length > 0 && (
+              <Button variant="secondary" size="lg" className="w-full shrink-0 shadow-2xl animate-in slide-in-from-bottom-2" onClick={llamarSiguiente}>
+                Llamar siguiente rápido
               </Button>
             )}
           </div>
 
           {/* Panel derecho — Cola */}
-          <Card className="col-span-3" padding={false}>
-            <div className="p-6 border-b border-slate-800 flex items-center justify-between">
-              <p className="text-slate-400 text-xs uppercase tracking-wide">Cola de espera</p>
-              <Badge variant="warning">{turnos.length} turnos</Badge>
+          <Card className="lg:col-span-8 xl:col-span-9 flex flex-col" padding={false}>
+            <div className="px-8 py-6 border-b border-white/5 flex items-center justify-between z-10 relative bg-white/[0.01]">
+              <p className="text-slate-400 text-xs uppercase tracking-[0.2em] font-bold">Cola de espera</p>
+              <Badge variant="warning">{turnos.length} en fila</Badge>
             </div>
 
             {loading ? (
-              <div className="flex justify-center py-12">
-                <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+              <div className="flex-1 flex justify-center items-center py-20">
+                <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
               </div>
             ) : turnos.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mb-3">
-                  <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <div className="flex-1 flex flex-col items-center justify-center py-20 text-center opacity-50">
+                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                  <svg className="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <p className="text-slate-600 text-sm">Sin turnos en espera</p>
+                <p className="text-slate-400 font-medium">La fila está vacía</p>
               </div>
             ) : (
-              <div className="divide-y divide-slate-800/50">
-                {/* Header tabla */}
-                <div className="grid grid-cols-12 px-6 py-2 text-xs text-slate-600 uppercase tracking-wide">
-                  <span className="col-span-1">#</span>
-                  <span className="col-span-3">Folio</span>
-                  <span className="col-span-4">Área</span>
-                  <span className="col-span-2">Espera</span>
-                  <span className="col-span-2 text-right">Acción</span>
-                </div>
-                {turnos.map((turno, i) => (
-                  <div
-                    key={turno.id}
-                    className={`grid grid-cols-12 items-center px-6 py-4 transition-colors ${
-                      i === 0 ? 'bg-slate-800/40' : 'hover:bg-slate-800/20'
-                    }`}
-                  >
-                    <span className={`col-span-1 text-sm font-bold ${i === 0 ? 'text-blue-400' : 'text-slate-600'}`}>
-                      {i + 1}
-                    </span>
-                    <div className="col-span-3 flex items-center gap-2">
-                      <span className={`font-black text-xl tracking-tight ${i === 0 ? 'text-white' : 'text-slate-300'}`}>
-                        {turno.folio}
-                      </span>
-                      {i === 0 && <Badge variant="info">Próximo</Badge>}
-                    </div>
-                    <span className="col-span-4 text-slate-400 text-sm">{turno.area?.nombre || '—'}</span>
-                    <span className={`col-span-2 text-sm ${i === 0 ? 'text-yellow-400' : 'text-slate-500'}`}>
-                      {tiempoEspera(turno.fecha_hora)}
-                    </span>
-                    <div className="col-span-2 flex justify-end">
-                      <button
-                        onClick={() => cancelarTurno(turno.id)}
-                        className="text-xs text-slate-600 hover:text-red-400 transition-colors py-1 px-2 rounded hover:bg-red-500/10"
+              <div className="flex-1 overflow-auto custom-scrollbar">
+                <table className="w-full text-sm text-left relative">
+                  <thead className="text-[10px] text-slate-500 uppercase tracking-widest sticky top-0 bg-[#0F172A] z-20 border-b border-white/5 shadow-sm">
+                    <tr>
+                      <th className="px-8 py-4 font-bold">#</th>
+                      <th className="px-6 py-4 font-bold">Folio</th>
+                      <th className="px-6 py-4 font-bold">Servicio</th>
+                      <th className="px-6 py-4 font-bold">Tiempo</th>
+                      <th className="px-8 py-4 text-right font-bold">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5">
+                    {turnos.map((turno, i) => (
+                      <tr
+                        key={turno.id}
+                        className={`transition-colors duration-200 ${
+                          i === 0 ? 'bg-blue-500/[0.03] hover:bg-blue-500/[0.05]' : 'hover:bg-white/[0.02]'
+                        }`}
                       >
-                        Cancelar
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                        <td className={`px-8 py-5 text-sm font-black ${i === 0 ? 'text-blue-400' : 'text-slate-600'}`}>
+                          {i + 1}
+                        </td>
+                        <td className="px-6 py-5">
+                          <div className="flex items-center gap-3">
+                            <span className={`font-black text-xl tracking-tight ${i === 0 ? 'text-white' : 'text-slate-300'}`}>
+                              {turno.folio}
+                            </span>
+                            {i === 0 && <Badge variant="info">Siguiente</Badge>}
+                          </div>
+                        </td>
+                        <td className="px-6 py-5 text-slate-400 font-medium">{turno.area?.nombre || '—'}</td>
+                        <td className="px-6 py-5">
+                          <span className={`px-2 py-1 rounded-md text-xs font-bold ${
+                            i === 0 ? 'bg-yellow-500/10 text-yellow-500' : 'text-slate-500'
+                          }`}>
+                            {tiempoEspera(turno.fecha_hora)}
+                          </span>
+                        </td>
+                        <td className="px-8 py-5 text-right">
+                          <button
+                            onClick={() => cancelarTurno(turno.id)}
+                            className="text-xs font-bold text-slate-500 hover:text-red-400 transition-colors py-1.5 px-3 rounded-lg hover:bg-red-500/10 border border-transparent hover:border-red-500/20"
+                          >
+                            X
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </Card>
@@ -245,19 +266,19 @@ export default function Ejecutivo() {
       </main>
 
       {/* Modal para registrar género */}
-      <Modal open={modalGenero} onClose={() => setModalGenero(false)} title="Registrar género del ciudadano">
-        <p className="text-slate-400 text-sm mb-5">
-          Antes de finalizar, registra el género de la persona atendida. Este dato se usa para estadísticas.
+      <Modal open={modalGenero} onClose={() => setModalGenero(false)} title="Finalizar Turno">
+        <p className="text-slate-400 text-sm mb-6 font-medium leading-relaxed">
+          Para concluir la atención y propósitos estadísticos, selecciona el género de la persona.
         </p>
-        <div className="flex flex-col gap-2 mb-6">
+        <div className="flex flex-col gap-3 mb-8">
           {generos.map(g => (
             <button
               key={g.id}
               onClick={() => setGeneroSeleccionado(g.id)}
-              className={`w-full text-left px-4 py-3 rounded-xl border font-medium text-sm transition-all ${
+              className={`w-full text-left px-5 py-4 rounded-2xl border font-bold text-sm transition-all duration-200 ${
                 generoSeleccionado === g.id
-                  ? 'bg-blue-600 border-blue-500 text-white'
-                  : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-600'
+                  ? 'bg-blue-600/20 border-blue-500 text-blue-300 shadow-inner'
+                  : 'bg-white/5 border-white/10 text-slate-300 hover:border-white/20 hover:bg-white/10'
               }`}
             >
               {g.nombre}
@@ -265,24 +286,31 @@ export default function Ejecutivo() {
           ))}
           <button
             onClick={() => setGeneroSeleccionado(null)}
-            className={`w-full text-left px-4 py-3 rounded-xl border text-sm transition-all ${
+            className={`w-full text-left px-5 py-4 rounded-2xl border text-sm transition-all duration-200 mt-2 ${
               generoSeleccionado === null
-                ? 'bg-slate-700 border-slate-500 text-white font-medium'
-                : 'bg-slate-800/50 border-slate-800 text-slate-500 hover:border-slate-700'
+                ? 'bg-slate-800/80 border-slate-600 text-white font-bold shadow-inner'
+                : 'bg-white/5 border-transparent text-slate-500 hover:border-white/10 hover:text-slate-300'
             }`}
           >
-            Prefiero no registrar
+            Prefiero no especificar
           </button>
         </div>
-        <div className="flex gap-2">
-          <Button variant="secondary" className="flex-1" onClick={() => setModalGenero(false)}>
+        <div className="flex gap-4">
+          <Button variant="ghost" size="lg" className="flex-1" onClick={() => setModalGenero(false)}>
             Cancelar
           </Button>
-          <Button variant="success" className="flex-1" onClick={confirmarAtender}>
-            Confirmar y finalizar
+          <Button variant="success" size="lg" className="flex-1" onClick={confirmarAtender}>
+            Cerrar Turno
           </Button>
         </div>
       </Modal>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.1); border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.2); }
+      `}} />
     </div>
   )
 }
